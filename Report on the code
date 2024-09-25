@@ -1,0 +1,29 @@
+Database Design
+The system uses a relational database schema with two core models, Book and Author, as follows:
+
+Author Model:
+
+Contains fields for the author's basic information, such as name, gender, average_rating, fans_count, and about. Each Author can have multiple books.
+Book Model:
+
+Contains fields such as title, author (foreign key), isbn, publication_date, num_pages, average_rating, and description. Each Book belongs to a specific author.
+Authentication
+The API uses JWT (JSON Web Tokens) for user authentication. JWT ensures that only authenticated users can create, update, or delete books and authors.
+
+User Registration (/register):
+Allows new users to register by providing their username, password, and email.
+User Login (/login):
+Authenticated users receive a JWT token upon successful login. This token is then used to authenticate protected API routes.
+Search Functionality
+The search functionality is implemented via the /books endpoint, where users can pass a query string to search for books based on the title or author’s name. The API uses Django’s filtering capabilities to match books with the query, returning relevant results.
+
+Recommendation System
+The recommendation system suggests books based on the user's favorite books. It primarily suggests books from the same author to maintain consistency in the reading experience.
+
+Favorite List: A user can add a maximum of 20 books to their favorites list.
+Algorithm: Upon adding a new favorite book, the system recommends five books written by the same author, ensuring relevance.
+Dummy Data Population:
+Due to the huge size of the data in kaggle and limitation of my machine,To facilitate testing, dummy data was generated using the Faker library. A Django management command was created to populate the database with randomly generated authors and books. The following dummy data generation procedure was adopted:
+
+Author Data: 10 authors were created, each with randomly generated information such as name, gender, average rating, and biography.
+Book Data: Each author was assigned between 5 and 10 books, with fields like title, ISBN, language, publication date, and description filled using realistic-looking random data.
